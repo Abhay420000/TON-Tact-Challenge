@@ -1,5 +1,6 @@
-/*import "@stdlib/deploy";
+import "@stdlib/deploy";
 
+/*
   TASK 2 - Proxy 
   Create a contract that forwards all received TONs
   to the admin contract (whose address is set in init_store).
@@ -10,6 +11,7 @@
   proxy contract needs to forward all TONs (attached to Refund message) back to the user.
   User address will be provided in Refund message body as "sender".
   In refund transaction, it is important to have a check that the refund message came from the admin address
+*/
 
 message(0x44) Refund {
   queryId: Int as uint64;
@@ -27,39 +29,5 @@ contract Task2 with Deployable {
   }
 
   receive(msg: Slice) {
-  }
-}
-*/
-import "@stdlib/deploy";
-import { UInt, Bytes, Int, Slice, ContractPromiseBatch, Log } from "@tonclient/types";
-import { ton, msg, math } from "@stdlib/ton";
-
-message(0x44) Refund {
-  queryId: Int as uint64;
-  sender: Address;
-}
-
-contract Task2 with Deployable {
-  admin: Address;
-
-  init(admin: Address) {
-    self.admin = admin;
-  }
-
-  receive() external {
-    // Forward received TONs to the admin contract
-    ContractPromiseBatch.create(self.admin)
-      .transfer(ton.balance)
-      .submit();
-  }
-
-  receive(msg: Refund) external {
-    // Check if the refund message came from the admin address
-    require(msg.sender == self.admin, 101);
-
-    // Forward all TONs back to the user
-    ContractPromiseBatch.create(msg.sender)
-      .transfer(ton.balance)
-      .submit();
   }
 }
