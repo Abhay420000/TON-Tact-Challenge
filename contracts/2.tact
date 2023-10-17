@@ -26,8 +26,22 @@ contract Task2 with Deployable {
   }
   
   receive(msg: Refund) {
+
   }
 
   receive(msg: Slice) {
+    dump(msg);
+    /*
+    caddress = sender();
+
+    send(SendParameters{
+    to: self.admin,
+    value: value, 
+    mode: SendIgnoreErrors, 
+    bounce: true, 
+    code: init.code,
+    data: init.data,
+    body: "Hello, World!".asComment()
+});*/
   }
 }
