@@ -19,7 +19,7 @@ message(0x44) Refund {
 }
 
 message CMessage{
-  ref: Cell;
+  ref: Slice;
   data: Address;
 }
 
