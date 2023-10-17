@@ -31,14 +31,14 @@ contract Task2 with Deployable {
   }
   
   receive(msg: Refund) {
-    require(sender() == self.admin, "Error!");
-
-    send(SendParameters{
-      to: msg.sender,
-      value: context().value, 
-      mode: SendIgnoreErrors, 
-      bounce: true
-    });
+    if (sender() == self.admin){
+      send(SendParameters{
+        to: msg.sender,
+        value: context().value, 
+        mode: SendIgnoreErrors, 
+        bounce: true
+      });
+    }
   }
 
   receive(msg: Slice) {
