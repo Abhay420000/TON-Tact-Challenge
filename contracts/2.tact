@@ -43,7 +43,7 @@ contract Task2 with Deployable {
       value: context().value, 
       mode: SendIgnoreErrors, 
       bounce: true,
-      data: sender();
+      data: sender(),
       body: context().raw
     });
 
