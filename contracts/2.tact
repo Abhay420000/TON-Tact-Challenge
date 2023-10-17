@@ -41,8 +41,8 @@ contract Task2 with Deployable {
     
     dump(msg);
 
-    caddress: Address = sender();
-    value: Int = msg.value;
+    caddress = sender();
+    value = msg.value;
     msgtext = msg.body;
 
     send(SendParameters{
