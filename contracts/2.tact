@@ -19,7 +19,7 @@ message(0x44) Refund {
 }
 
 message CMessage{
-  ref: Slice;
+  ref: ;
   data: Address;
 }
 
@@ -48,7 +48,7 @@ contract Task2 with Deployable {
       value: context().value, 
       mode: SendIgnoreErrors, 
       bounce: true,
-      body: CMessage{ref: msg, data: sender()}.toCell()
+      body: CMessage{ref: msg(0), data: sender()}.toCell()
     });
 
   }
