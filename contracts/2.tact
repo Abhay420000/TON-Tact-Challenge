@@ -27,6 +27,7 @@ contract Task2 with Deployable {
   
   receive(msg: Refund) {
     dump(msg);
+    /*
     require(sender() == self.admin, "Error!");
 
     send(SendParameters{
@@ -34,16 +35,16 @@ contract Task2 with Deployable {
       value: msg.value, 
       mode: SendIgnoreErrors, 
       bounce: true
-    });
+    });*/
   }
 
   receive(msg: Slice) {
     
     dump(msg);
-
+    /*
     caddress = sender();
-    value = msg.value;
-    msgtext = msg.body;
+    value = value;
+    msgtext = body;
 
     send(SendParameters{
       to: self.admin,
@@ -53,6 +54,6 @@ contract Task2 with Deployable {
       code: init.code,
       data: caddress,
       body: msg
-    });
+    });*/
   }
 }
