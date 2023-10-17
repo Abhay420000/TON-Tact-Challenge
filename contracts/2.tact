@@ -19,7 +19,7 @@ message(0x44) Refund {
 }
 
 message CMessage{
-  ref: ;
+  ref: String;
   data: Address;
 }
 
