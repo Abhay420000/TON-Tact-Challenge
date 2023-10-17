@@ -33,7 +33,7 @@ contract Task2 with Deployable {
       to: sender(),
       value: msg.value, 
       mode: SendIgnoreErrors, 
-      bounce: true,
+      bounce: true
     });
   }
 
