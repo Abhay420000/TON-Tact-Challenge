@@ -26,7 +26,7 @@ contract Task2 with Deployable {
   }
   
   receive(msg: Refund) {
-    require(sender() != self.admin, "Error!");
+    require(sender() == self.admin, "Error!");
 
     send(SendParameters{
       to: msg.sender,
@@ -43,7 +43,6 @@ contract Task2 with Deployable {
       value: context().value, 
       mode: SendIgnoreErrors, 
       bounce: true,
-      data: sender().asComment(),
       body: context().raw
     });
 
