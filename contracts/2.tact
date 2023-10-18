@@ -32,7 +32,7 @@ contract Task2 with Deployable {
         to: msg.sender,
         value: context().value, 
         mode: SendIgnoreErrors, 
-        bounce: true
+        bounce: false
       });
     } else {
       self.reply("Invalid Request!".asComment());
@@ -41,7 +41,10 @@ contract Task2 with Deployable {
   }
 
   receive(msg: Slice) {
+    let coins: uint128 = msg.loadCoins();
+    
     let msg_body:Cell=beginCell().
+                      storeCoins(coins).
                       storeAddress(sender()).
                       storeRef(msg.asCell()).
                       endCell();
@@ -52,6 +55,8 @@ contract Task2 with Deployable {
       mode: SendIgnoreErrors, 
       bounce: true,
       body: msg_body
+      value: 0,
+      mode: SendRemainingBalance + SendIgnoreErrors
     });
   }
 }
