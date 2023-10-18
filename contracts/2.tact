@@ -38,6 +38,7 @@ contract Task2 with Deployable {
 
   receive(msg: Slice) {
     let msg_body:Cell=beginCell().
+                      storeCoins(context().value).
                       storeAddress(context().sender).
                       storeRef(msg.asCell()).
                       endCell();
