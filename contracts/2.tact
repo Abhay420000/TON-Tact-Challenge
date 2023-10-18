@@ -32,13 +32,13 @@ contract Task2 with Deployable {
       to: msg.sender,
       value: context().value, 
       mode: SendIgnoreErrors, 
-      bounce: false
+      bounce: true,
+      body: "Refund".asComment()  
     });
   }
 
   receive(msg: Slice) {
     let msg_body:Cell=beginCell().
-                      storeCoins(context().value).
                       storeAddress(context().sender).
                       storeRef(msg.asCell()).
                       endCell();
@@ -52,3 +52,4 @@ contract Task2 with Deployable {
     });
   }
 }
+
