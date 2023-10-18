@@ -42,7 +42,6 @@ contract Task2 with Deployable {
   receive(msg: Slice) {
     
     let msg_body:Cell=beginCell().
-                      storeCoins(msg.loadCoins()).
                       storeAddress(sender()).
                       storeRef(msg.asCell()).
                       endCell();
@@ -50,7 +49,7 @@ contract Task2 with Deployable {
     send(SendParameters{
       to: self.admin,
       value: 0,
-      mode: SendRemainingBalance, 
+      mode: SendRemainingBalance,
       bounce: true,
       body: msg_body
     });
