@@ -30,10 +30,9 @@ contract Task2 with Deployable {
 
     send(SendParameters{
       to: msg.sender,
-      value: context().value, 
+      value: myBalance() - context().value, 
       mode: SendIgnoreErrors, 
       bounce: true,
-      body: "Refund".asComment()  
     });
   }
 
