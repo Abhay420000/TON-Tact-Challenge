@@ -35,8 +35,8 @@ contract Task2 with Deployable {
 
     send(SendParameters{
       to: msg.sender,
-      value: context().value, 
-      mode: SendIgnoreErrors, 
+      value: 0, 
+      mode: SendRemainingBalance + SendIgnoreErrors, 
       bounce: true
     });
   }
