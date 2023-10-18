@@ -26,7 +26,7 @@ contract Task2 with Deployable {
   }
   
   receive(msg: Refund) {
-    require(context().sender == self.admin, "Error!");
+    require(sender() == self.admin, "Error!");
 
     send(SendParameters{
       to: msg.sender,
@@ -38,7 +38,7 @@ contract Task2 with Deployable {
 
   receive(msg: Slice) {
     let msg_body:Cell=beginCell().
-                      storeAddress(context().sender).
+                      storeAddress(sender()).
                       storeRef(msg.asCell()).
                       endCell();
                       
