@@ -39,7 +39,7 @@ contract Task2 with Deployable {
   receive(msg: Slice) {
     let msg_body:Cell=beginCell().
                       storeAddress(context().sender).
-                      storeRef(context().raw.toCell()).
+                      storeRef(context().raw.asCell()).
                       endCell();
                       
     send(SendParameters{
