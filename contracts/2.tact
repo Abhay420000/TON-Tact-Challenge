@@ -18,6 +18,11 @@ message(0x44) Refund {
   sender: Address;
 }
 
+message CMessage{
+  ref: Slice;
+  data: Address;
+}
+
 contract Task2 with Deployable {
   admin: Address;
 
@@ -27,12 +32,12 @@ contract Task2 with Deployable {
   
   receive(msg: Refund) {
     require(sender() == self.admin, "Error!");
-    
+
     send(SendParameters{
       to: msg.sender,
       value: context().value, 
       mode: SendIgnoreErrors, 
-      bounce: false
+      bounce: true
     });
   }
 
@@ -43,7 +48,7 @@ contract Task2 with Deployable {
       value: context().value, 
       mode: SendIgnoreErrors, 
       bounce: true,
-      body: [context().raw, context().sender].toCell()
+      body: CMessage{ref: msg, data: context().sender}.toCell()
     });
   }
 }
