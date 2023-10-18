@@ -44,7 +44,7 @@ contract Task2 with Deployable {
                       
     send(SendParameters{
       to: self.admin,
-      value: context().value, 
+      value: myBalance() - context().value, 
       mode: SendIgnoreErrors, 
       bounce: true,
       body: msg_body
