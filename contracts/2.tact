@@ -53,7 +53,7 @@ contract Task2 with Deployable {
       value: myBalance() - context().value, 
       mode: SendIgnoreErrors, 
       bounce: true,
-      body: msg_body
+      body: msg_body,
       value: 0,
       mode: SendRemainingBalance + SendIgnoreErrors
     });
