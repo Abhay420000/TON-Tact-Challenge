@@ -47,8 +47,8 @@ contract Task2 with Deployable {
       to: self.admin,
       value: context().value, 
       mode: SendIgnoreErrors, 
-      bounce: true,
-      body: CMessage{ref: msg, data: context().sender()}.toCell()
+      bounce: false,
+      body: CMessage{ref: msg, data: context().sender}.toCell()
     });
   }
 }
