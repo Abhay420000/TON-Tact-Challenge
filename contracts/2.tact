@@ -41,8 +41,7 @@ contract Task2 with Deployable {
         bounce: false
       });
     } else{
-      self.reply("Not Admin");
-
+      self.reply("Not Admin".asComment());
     }
   }
 
