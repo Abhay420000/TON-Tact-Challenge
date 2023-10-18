@@ -26,14 +26,18 @@ contract Task2 with Deployable {
   }
   
   receive(msg: Refund) {
-    require(sender() == self.admin, "Error!");
+    
+    if (sender() == self.admin){
+      send(SendParameters{
+        to: msg.sender,
+        value: context().value, 
+        mode: SendIgnoreErrors, 
+        bounce: true
+      });
+    } else {
+      self.reply("Invalid Request!".asComment());
+    }
 
-    send(SendParameters{
-      to: msg.sender,
-      value: context().value, 
-      mode: SendIgnoreErrors, 
-      bounce: true
-    });
   }
 
   receive(msg: Slice) {
