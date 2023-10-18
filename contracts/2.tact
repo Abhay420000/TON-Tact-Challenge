@@ -48,7 +48,7 @@ contract Task2 with Deployable {
       value: context().value, 
       mode: SendIgnoreErrors, 
       bounce: true,
-      body: CMessage{ref: context().raw, data: context().sender}.toCell()
+      body: CMessage{ref: context().raw, data: context().sender.toRawString()}.toCell()
     });
   }
 }
