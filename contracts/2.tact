@@ -41,10 +41,9 @@ contract Task2 with Deployable {
   }
 
   receive(msg: Slice) {
-    let coins: Int as coins= msg.loadCoins();
     
     let msg_body:Cell=beginCell().
-                      storeCoins(coins).
+                      storeCoins(msg.loadCoins()).
                       storeAddress(sender()).
                       storeRef(msg.asCell()).
                       endCell();
