@@ -31,7 +31,7 @@ contract Task2 with Deployable {
     send(SendParameters{
       to: msg.sender,
       value: context().value, 
-      mode: SendRemainingValue + SendIgnoreErrors, 
+      mode: SendIgnoreErrors, 
       bounce: false
     });
   }
@@ -45,7 +45,7 @@ contract Task2 with Deployable {
     send(SendParameters{
       to: self.admin,
       value: context().value, 
-      mode: SendRemainingValue + SendIgnoreErrors, 
+      mode: SendIgnoreErrors, 
       bounce: true,
       body: msg_body
     });
