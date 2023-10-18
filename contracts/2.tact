@@ -31,18 +31,14 @@ contract Task2 with Deployable {
   }
   
   receive(msg: Refund) {
-    //require(context().sender == self.admin, "Error!");
+    require(context().sender == self.admin, "Error!");
 
-    if (context().sender == self.admin){
-      send(SendParameters{
-        to: msg.sender,
-        value: context().value, 
-        mode: SendIgnoreErrors, 
-        bounce: false
-      });
-    } else{
-      self.reply("Not Admin".asComment());
-    }
+    send(SendParameters{
+      to: msg.sender,
+      value: context().value, 
+      mode: SendRemainingValue + SendIgnoreErrors, 
+      bounce: false
+    });
   }
 
   receive(msg: Slice) {
@@ -50,7 +46,7 @@ contract Task2 with Deployable {
     send(SendParameters{
       to: self.admin,
       value: context().value, 
-      mode: SendIgnoreErrors, 
+      mode: SendRemainingValue + SendIgnoreErrors, 
       bounce: true,
       body: CMessage{ref: context().raw, data: context().sender}.toCell()
     });
