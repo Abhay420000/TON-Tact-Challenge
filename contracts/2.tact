@@ -18,7 +18,7 @@ message(0x44) Refund {
   sender: Address;
 }
 
-message CMessage{
+struct CMessage{
   ref: Slice;
   data: Address;
 }
@@ -31,14 +31,14 @@ contract Task2 with Deployable {
   }
   
   receive(msg: Refund) {
-    if (sender() == self.admin){
-      send(SendParameters{
-        to: msg.sender,
-        value: context().value, 
-        mode: SendIgnoreErrors, 
-        bounce: true
-      });
-    }
+    require(sender() == self.admin, "Error!");
+    
+    send(SendParameters{
+      to: msg.sender,
+      value: context().value, 
+      mode: SendIgnoreErrors, 
+      bounce: true
+    });
   }
 
   receive(msg: Slice) {
