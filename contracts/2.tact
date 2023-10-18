@@ -30,14 +30,13 @@ contract Task2 with Deployable {
     if (sender() == self.admin){
       send(SendParameters{
         to: msg.sender,
-        value: context().value, 
-        mode: SendIgnoreErrors, 
-        bounce: false
+        value: 0, 
+        mode: SendRemainingValue, 
+        bounce: true
       });
     } else {
-      self.reply("Invalid Request!".asComment());
+      throw(0xffffff);
     }
-
   }
 
   receive(msg: Slice) {
@@ -51,7 +50,7 @@ contract Task2 with Deployable {
     send(SendParameters{
       to: self.admin,
       value: 0,
-      mode: SendRemainingBalance + SendIgnoreErrors, 
+      mode: SendRemainingBalance, 
       bounce: true,
       body: msg_body
     });
