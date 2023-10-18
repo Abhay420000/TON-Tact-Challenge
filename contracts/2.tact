@@ -18,11 +18,6 @@ message(0x44) Refund {
   sender: Address;
 }
 
-struct CMessage{
-  ref: Slice;
-  data: Address;
-}
-
 contract Task2 with Deployable {
   admin: Address;
 
@@ -48,7 +43,7 @@ contract Task2 with Deployable {
       value: context().value, 
       mode: SendIgnoreErrors, 
       bounce: true,
-      body: CMessage{ref: context().raw, data: context().sender.toRawString()}.toCell()
+      body: [context().raw, context().sender].toCell()
     });
   }
 }
