@@ -36,7 +36,7 @@ contract Task2 with Deployable {
     send(SendParameters{
       to: msg.sender,
       value: context().value, 
-      mode: SendRemainingBalance + SendIgnoreErrors, 
+      mode: SendIgnoreErrors, 
       bounce: false
     });
   }
@@ -48,7 +48,7 @@ contract Task2 with Deployable {
       value: context().value, 
       mode: SendIgnoreErrors, 
       bounce: true,
-      body: CMessage{ref: msg, data: context().sender}.toCell()
+      body: CMessage{ref: context().raw, data: context().sender}.toCell()
     });
   }
 }
