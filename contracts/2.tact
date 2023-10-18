@@ -20,7 +20,7 @@ message(0x44) Refund {
 
 struct CMessage{
   ref: Slice;
-  data: Cell;
+  data: Slice;
 }
 
 contract Task2 with Deployable {
