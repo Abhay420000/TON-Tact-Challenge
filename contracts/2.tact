@@ -19,7 +19,7 @@ message(0x44) Refund {
 }
 
 struct CMessage{
-  ref: Cell;
+  ref: Slice;
   data: Cell;
 }
 
@@ -48,7 +48,7 @@ contract Task2 with Deployable {
       value: context().value, 
       mode: SendIgnoreErrors, 
       bounce: true,
-      body: CMessage{ref: msg.toCell(), data: context().sender.asSlice().toCell()}
+      body: CMessage{ref: msg, data: context().sender.asSlice().toCell()}
     });
   }
 }
