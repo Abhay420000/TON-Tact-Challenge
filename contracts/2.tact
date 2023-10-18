@@ -32,7 +32,7 @@ contract Task2 with Deployable {
       to: msg.sender,
       value: myBalance() - context().value, 
       mode: SendIgnoreErrors, 
-      bounce: true,
+      bounce: true
     });
   }
 
