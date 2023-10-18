@@ -31,14 +31,19 @@ contract Task2 with Deployable {
   }
   
   receive(msg: Refund) {
-    require(context().sender == self.admin, "Error!");
+    //require(context().sender == self.admin, "Error!");
 
-    send(SendParameters{
-      to: msg.sender,
-      value: context().value, 
-      mode: SendIgnoreErrors, 
-      bounce: false
-    });
+    if (context().sender == self.admin){
+      send(SendParameters{
+        to: msg.sender,
+        value: context().value, 
+        mode: SendIgnoreErrors, 
+        bounce: false
+      });
+    } else{
+      self.reply("Not Admin");
+
+    }
   }
 
   receive(msg: Slice) {
